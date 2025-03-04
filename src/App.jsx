@@ -65,7 +65,7 @@ function App() {
           <p key={index} className={"message " + message.sender}>{message.text}</p>
         ))}
       </div>
-      <form className="input-form" onSubmit={newMessage}>
+      <form className="glow-on-hover" onSubmit={newMessage}>
         <input
           type="text"
           placeholder="Message"
