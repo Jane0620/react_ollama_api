@@ -1,0 +1,40 @@
+// Express 主程式
+const express = require("express");
+const cors = require("cors");
+const { spawn } = require("child_process");
+
+const app = express();
+app.use(cors()); // 允許前端請求
+app.use(express.json());
+
+app.get("/chat", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+
+  const userMessage = req.query.message;
+  if (!userMessage) {
+    res.write("data: 請輸入內容\n\n");
+    res.end();
+    return;
+  }
+
+  // 呼叫 Ollama 來產生 AI 回應
+  const ollamaProcess = spawn("ollama", ["run", "jslin/gemma2-it-tw:2b"], { shell: true });
+
+  ollamaProcess.stdin.write(userMessage + "\n");
+  ollamaProcess.stdin.end();
+
+  ollamaProcess.stdout.on("data", (data) => {
+    res.write(`data: ${data.toString()}\n\n`);
+  });
+
+  ollamaProcess.on("close", () => {
+    res.write("data: [END]\n\n");
+    res.end();
+  });
+});
+
+app.listen(5000, () => {
+  console.log("Server is running on http://localhost:5000");
+});
