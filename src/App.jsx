@@ -72,7 +72,7 @@ function App() {
           value={newInputValue}
           onChange={(e) => setNewInputValue(e.target.value)}
         />
-        <input type="submit" value="Send" />
+        <input className="glow-on-hover" type="submit" value="Send" />
       </form>
     </main>
   );
