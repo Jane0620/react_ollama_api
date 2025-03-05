@@ -1,12 +1,16 @@
-// Express 主程式
 const express = require("express");
 const cors = require("cors");
 const { spawn } = require("child_process");
+const path = require("path");
 
 const app = express();
 app.use(cors()); // 允許前端請求
 app.use(express.json());
 
+// 提供 React 前端靜態文件
+app.use(express.static(path.join(__dirname, "../dist")));
+
+// Chat API，處理 EventSource 連線
 app.get("/chat", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
@@ -35,6 +39,12 @@ app.get("/chat", (req, res) => {
   });
 });
 
+// 捕捉所有未匹配的路由，回傳 React 頁面
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
+// 啟動伺服器
 app.listen(5000, () => {
   console.log("Server is running on http://localhost:5000");
 });
