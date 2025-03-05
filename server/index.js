@@ -10,6 +10,9 @@ app.use(express.json());
 // 提供 React 前端靜態文件
 app.use(express.static(path.join(__dirname, "../dist")));
 
+// 提供 chatbot-widget.js 和 chatbot-loader.js
+app.use(express.static(path.join(__dirname, "../public")));
+
 // Chat API，處理 EventSource 連線
 app.get("/chat", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
