@@ -1,3 +1,15 @@
+# 本地模型聊天機器人嵌入系統
+為了快速建立動態前端畫面及盡可能不改動系統，我使用這個方法嘗試製作，這裡記錄我自己製作的過程，目前有一個分支是預計要整理前端跟設計其他UI，所以如果只想看基本的功能請使用main
+
+
+
+
+
+
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
