@@ -1,19 +1,32 @@
+/* 清除浮動 */
+.chat-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .chat-input {
-    display: inline;
-    justify-content: center;
-    margin: auto;
-  }
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  clear: both;
+  width: 100%;
   
-  .chat-input input {
-    padding: 8px;
-    flex: 1;
-  }
-  
-  .chat-input button {
-    padding: 8px;
-    background-color: #f76f91;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+}
+
+.chat-input input {
+  margin-right: 20px;
+  padding: 10px;
+  flex: 3;
+  border-radius: 10px;
+}
+
+.chat-input button {
+  padding: 10px;
+  background-color: #f76f91;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
   

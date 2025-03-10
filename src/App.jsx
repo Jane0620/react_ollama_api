@@ -48,7 +48,7 @@ function App() {
 
   return (
     <main>
-      <h1>Practice Chat Bot</h1>
+      <h1>React Chat Bot</h1>
       <ChatMessages messages={messages} />
       <ChatInput onSendMessage={sendMessage} />
 
