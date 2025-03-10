@@ -4,7 +4,7 @@ import ChatInput from "./components/ChatInput";
 import ChatbotWidget from "./components/ChatbotWidget";
 import "./App.css";
 
-const functionUrl = "http://localhost:5000/chat"; // Express 後端 API
+const functionUrl = import.meta.env.VITE_API_URL;
 
 function App() {
   const [messages, setMessages] = useState([]);

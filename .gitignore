@@ -24,6 +24,10 @@ dist-ssr
 *.sw?
 
 # 忽略實際配置文件，但保留範本
-config/ollama.config.js
+server/config/ollama.config.js
 # 不忽略示例配置
-!config/ollama.config.example.js
+!server/config/ollama.config.example.js
+
+# 環境變量文件
+.env*
+!.env.example
