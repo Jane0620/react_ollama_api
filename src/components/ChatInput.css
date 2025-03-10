@@ -1,0 +1,19 @@
+.chat-input {
+    display: inline;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  .chat-input input {
+    padding: 8px;
+    flex: 1;
+  }
+  
+  .chat-input button {
+    padding: 8px;
+    background-color: #f76f91;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
