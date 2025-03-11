@@ -8,16 +8,27 @@
 .chat-input {
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   border-radius: 20px;
   margin: auto;
   clear: both;
   width: 100%;
+=======
+  margin: auto;
+  clear: both;
+  width: 100%;
+  
+>>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b
 }
 
 .chat-input input {
   margin-right: 20px;
   padding: 10px;
   flex: 3;
+<<<<<<< HEAD
+=======
+  border-radius: 10px;
+>>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b
 }
 
 .chat-input button {
@@ -26,4 +37,10 @@
   color: white;
   border: none;
   cursor: pointer;
+<<<<<<< HEAD
 }
+=======
+  border-radius: 10px;
+}
+  
+>>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b

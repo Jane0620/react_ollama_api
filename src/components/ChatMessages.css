@@ -15,9 +15,10 @@
 
 .user {
   background-color: #f76f91;
+  /* background-color: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); */
   margin-left: 2em;
   margin-right: auto;
-  text-align: right;
+  text-align: left;
   color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
   float: right;
@@ -33,4 +34,8 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
   float: left;
   clear: both;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b
