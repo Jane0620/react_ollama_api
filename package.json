@@ -11,7 +11,7 @@
     "setup": "cp .env.example .env.development && cp .env.example .env.production && echo '請修改 .env.* 文件中的設置'"
   },
   "dependencies": {
-    "axios": "^1.8.1",
+    "axios": "^1.8.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

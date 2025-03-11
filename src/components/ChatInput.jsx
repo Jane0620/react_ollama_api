@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
 import "./ChatInput.css";
-=======
-import "./ChatInput.css"
->>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b
 
-const ChatInput = ({ onSendMessage }) => {
+function ChatInput({ onSendMessage }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -18,15 +14,14 @@ const ChatInput = ({ onSendMessage }) => {
 
   return (
     <form className="chat-input" onSubmit={handleSubmit}>
-      <input
+      <textarea
         type="text"
         placeholder="Message"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
+        onChange={(e) => setInputValue(e.target.value)} />
       <button type="submit">Send</button>
     </form>
   );
-};
+}
 
 export default ChatInput;
