@@ -1,41 +1,69 @@
-import React, { useState, useEffect } from "react";
-import "./ChatbotWidget.css"; // 引入 CSS
+import React, { useState } from "react";
+import { ChatInput } from "./ChatInput"; 
+import ChatMessages from "./ChatMessages"; 
+import "./ChatbotWidget.css";
+
+const functionUrl = import.meta.env.VITE_API_URL;
 
 const ChatbotWidget = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [position, setPosition] = useState({
-        x: window.innerWidth - 70,
-        y: window.innerHeight - 70,
-    });
+  const [messages, setMessages] = useState([]);
+  const [isVisible, setIsVisible] = useState(false); // 控制視窗顯示狀態
 
-    useEffect(() => {
-        const handleResize = () => {
-            setPosition({
-                x: window.innerWidth - 70,
-                y: window.innerHeight - 70,
-            });
-        };
+  // 發送訊息給後端
+  const sendMessage = (userMessage) => {
+    setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
 
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    try {
+      const eventSource = new EventSource(`${functionUrl}?message=${encodeURIComponent(userMessage)}`);
 
-    return (
-        <div>
-            <div
-                className="chatbot-icon"
-                style={{ left: `${position.x}px`, top: `${position.y}px` }}
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                <span>click</span>
-            </div>
-            {isOpen && (
-                <div className="chatbot-container">
-                    <iframe src="http://localhost:5000" title="Chatbot"></iframe>
-                </div>
-            )}
+      // 添加一個空的 AI 訊息，之後會更新
+      setMessages((prev) => [...prev, { sender: "ai", text: "" }]);
+      let accumulatedResponse = "";
+
+      eventSource.onmessage = (event) => {
+        if (event.data === "[END]") {
+          eventSource.close();
+          return;
+        }
+
+        accumulatedResponse += event.data;
+        setMessages((prev) => {
+          const updatedMessages = [...prev];
+          updatedMessages[updatedMessages.length - 1] = {
+            sender: "ai",
+            text: accumulatedResponse,
+          };
+          return updatedMessages;
+        });
+      };
+
+      eventSource.onerror = () => {
+        console.error("SSE 連線錯誤");
+        eventSource.close();
+      };
+    } catch (error) {
+      console.error("發送訊息時發生錯誤:", error);
+    }
+  };
+
+  const toggleVisibility = () => {
+    setIsVisible((prev) => !prev); // 切換視窗顯示狀態
+  };
+
+  return (
+    <>
+      <button className="chatbot-toggle" onClick={toggleVisibility}>
+        {isVisible ? "close" : "open"}
+      </button>
+      {isVisible && (
+        <div className="chatbot-window">
+          <h1>React Chat Bot</h1>
+          <ChatMessages messages={messages} />
+          <ChatInput onSendMessage={sendMessage} />
         </div>
-    );
+      )}
+    </>
+  );
 };
 
 export default ChatbotWidget;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ChatInput.css";
 
-function ChatInput({ onSendMessage }) {
+const ChatInput = ({ onSendMessage }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -33,6 +33,6 @@ function ChatInput({ onSendMessage }) {
       <button type="submit">Send</button>
     </form>
   );
-}
+};
 
-export default ChatInput;
+export { ChatInput }; // 確保命名匯出
