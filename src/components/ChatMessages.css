@@ -1,41 +1,49 @@
 .chat-container {
   max-width: 600px;
   margin: auto;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
   border-radius: 10px;
   position: relative;
-  display: inline;
+  /* display: inline-block; */
   max-width: 80%;
 }
 
-.user {
+.message p {
+  margin: 0; /* 移除段落的預設 margin */
+}
+
+.message ul,
+.message ol {
+  margin: 0;
+  padding-left: 20px; /* 如果需要縮排，保留 padding */
+}
+
+.user-message {
   background-color: #f76f91;
-  /* background-color: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); */
   margin-left: 2em;
-  margin-right: auto;
   text-align: left;
   color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
-  float: right;
-  clear: both;
+  align-self: flex-end;
 }
 
-.ai {
+.ai-message {
   background-color: #cfcfcf;
   margin-right: 2em;
-  margin-left: auto;
   text-align: left;
   color: black;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
-  float: left;
-  clear: both;
-<<<<<<< HEAD
+  align-self: flex-start;
+  line-height: 2;
 }
-=======
+.ai-message ul,
+.ai-message ol {
+  margin: 0;
+  padding-left: 20px; /* 如果需要縮排，保留 padding */
 }
->>>>>>> 197f52550858007e215987a3648dc1c31eac2b8b
