@@ -12,13 +12,22 @@ function ChatInput({ onSendMessage }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // 阻止默認換行行為
+      handleSubmit(e);
+    }
+  };
+
   return (
     <form className="chat-input" onSubmit={handleSubmit}>
       <textarea
         type="text"
         placeholder="Message"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)} />
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown} // 綁定鍵盤事件
+      />
       <button type="submit">Send</button>
     </form>
   );
