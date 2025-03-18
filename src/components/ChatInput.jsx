@@ -24,6 +24,8 @@ function ChatInput({ onSendMessage }) {
       <textarea
         type="text"
         placeholder="Message"
+        cols={50}
+        rows={3}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown} // 綁定鍵盤事件
