@@ -2,7 +2,9 @@
   position: fixed;
   width: 60px;
   height: 60px;
-  background-color: #f76f91;
+  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9);
+  background-size: 200% 150%;
+  animation: gradientAnimation 15s ease infinite;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -29,12 +31,11 @@
 .top-left-window {
   border-radius: 20px;
   position: fixed;
-  bottom: 90px; /* 與按鈕的間距 */
-  right: 20px; /* 與按鈕對齊 */
-  width: 400px;
-  height: 500px;
-  background-color: white;
-  border: 1px solid #ccc;
+  bottom: 85px; /* 與按鈕的間距 */
+  right: 60px; /* 與按鈕對齊 */
+  width: 350px;
+  height: 450px;
+  background-color: white;  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 999;
   display: flex;
@@ -46,15 +47,20 @@
   margin-top: auto; /* 將 ChatInput 推到最底部 */
   flex-shrink: 0; /* 防止輸入框被壓縮 */
   padding: 10px;
-  background-color: #fff;
-  border-top: 1px solid #ccc; /* 與訊息區域分隔 */
+  background-color: #fff;  
 }
 
 .chatbot-header {
-  background-color: #f76f91;
+  /* background: linear-gradient(45deg, #9599e2, #8bc6ec); */
+  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   color: white;
   text-align: center;
-  font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

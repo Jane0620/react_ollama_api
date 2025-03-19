@@ -1,24 +1,39 @@
 .chat-messages {
-  max-height: 100%; /* 確保訊息框不會超出父容器 */
-  overflow-y: auto; /* 啟用垂直滾動軸 */
-  /* padding: 10px; */
-  border: 1px solid #ccc;
-  flex: 1; /* 填滿剩餘空間 */
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  overflow-y: auto;
+  flex: 0 1 auto;
 }
 
 .message {
-  background-color: aqua;
-  
   border-radius: 10px;
-  position: relative;  
-  max-width: 80%;
+  position: relative;
   margin-bottom: 10px;
+  margin-top: 5px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  padding: 0px 10px;
 }
 
 .user-message {
-  
+  color: white;
+  max-width: 85%;
+  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9);
+  background-size: 400% 400%;
+  border-radius: 10px;
+  position: relative;
+  align-self: flex-end;
+  text-align: left;
+  margin-right: 5px;
 }
 
 .ai-message {
-  
+  background-color: #f9f9f9;
+  max-width: 85%;
+  margin-left: 5px;
+  align-self: flex-start;
+  text-align: left;
 }

@@ -6,7 +6,7 @@
 }
 
 .chat-input {
-  padding: 10px;
+  
   display: flex;
   justify-content: center;
   margin: auto;
@@ -38,14 +38,22 @@ textarea:focus {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 10px;
-  background-color: #f76f91;
+  background: linear-gradient(45deg, #9599e2, #8bc6ec);
   color: white;
   border: none;
   cursor: pointer;
-  height: 40px; 
+  height: 50%; 
   
 }
 button:hover {
-  background-color: #e65579;
+  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   color: white;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
