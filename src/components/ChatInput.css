@@ -6,6 +6,7 @@
 }
 
 .chat-input {
+  padding: 10px;
   display: flex;
   justify-content: center;
   margin: auto;
@@ -24,8 +25,8 @@
   line-height: 1.5; 
   flex: 1;
   resize: none;
-  font-size: 16px; 
-  height: 40px; /* 明確設定高度 */
+  font-size: 14px; 
+  height: 60px; /* 明確設定高度 */
 }
 textarea:focus {
   outline: none;

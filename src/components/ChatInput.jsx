@@ -20,7 +20,7 @@ const ChatInput = ({ onSendMessage }) => {
   };
 
   return (
-    <form className="chat-input" onSubmit={handleSubmit}>
+    <div className="chat-input" onSubmit={handleSubmit}>
       <textarea
         type="text"
         placeholder="Message"
@@ -31,7 +31,7 @@ const ChatInput = ({ onSendMessage }) => {
         onKeyDown={handleKeyDown} // 綁定鍵盤事件
       />
       <button type="submit">Send</button>
-    </form>
+    </div>
   );
 };
 

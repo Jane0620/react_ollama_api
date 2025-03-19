@@ -9,7 +9,7 @@ function ChatMessages({ messages }) {
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`message ${message.sender === "ai" ? "ai-message" : "user-message"}`}
+          className={`message ${message.sender === "user" ? "user-message" : "ai-message"}`}
         >
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.text}</ReactMarkdown>
         </div>

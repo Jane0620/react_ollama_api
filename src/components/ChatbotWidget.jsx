@@ -52,14 +52,20 @@ const ChatbotWidget = () => {
 
   return (
     <>
-      <button className="chatbot-toggle" onClick={toggleVisibility}>
+      <button className="chatbot-toggle fixed-button" onClick={toggleVisibility}>
         {isVisible ? "close" : "open"}
       </button>
       {isVisible && (
-        <div className="chatbot-window">
-          <h1>React Chat Bot</h1>
-          <ChatMessages messages={messages} />
-          <ChatInput onSendMessage={sendMessage} />
+        <div className="top-left-window">
+          <div className="chatbot-header">
+            <h1>Chat Bot</h1>
+          </div>
+          
+            <ChatMessages messages={messages} />
+          
+          <div className="chat-input-container">
+            <ChatInput onSendMessage={sendMessage} />
+          </div>
         </div>
       )}
     </>
