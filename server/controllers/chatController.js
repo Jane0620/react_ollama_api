@@ -44,68 +44,65 @@ async function getChatResponse(req, res) {
  * 透過 SSE (Server-Sent Events) 進行流式回應
  */
 async function streamChatResponse(req, res) {
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-
-  const userMessage = req.query.message;
-  if (!userMessage) {
-    res.write("data: 請輸入內容\n\n");
-    res.end();
-    return;
-  }
-
   try {
-    const requestData = prepareRequestData(userMessage);
-    requestData.stream = true;
+    const userMessage = req.query.message; // 從查詢參數中獲取訊息
+    if (!userMessage) {
+      res.status(400).write("data: 請提供訊息\n\n");
+      res.end();
+      return;
+    }
 
-    const ollamaResponse = await axios.post(
+    // 設定 SSE Headers
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+
+    // 向客戶端發送初始訊息
+    console.log(res.write("data: 連線成功，開始處理訊息\n\n"));
+
+    // 準備請求數據
+    const requestData = prepareRequestData(userMessage);
+
+    // 呼叫 Ollama API
+    const response = await axios.post(
       `${config.OLLAMA_ENDPOINT}/api/chat`,
       requestData,
-      { responseType: "stream" }
+      {
+        responseType: "stream", // 確保以流的方式接收回應
+      }
     );
 
-    ollamaResponse.data.on("data", (chunk) => {
-      const jsonData = chunk.toString();
+    // 處理流式回應
+    response.data.on("data", (chunk) => {
+      const data = chunk.toString();
       try {
-        const parsedData = JSON.parse(jsonData);
-        if (parsedData.message?.content) {
-          res.write(`data: ${parsedData.message.content}\n\n`);
+        const parsedChunk = JSON.parse(data); // 假設每個 chunk 是 JSON 格式
+        if (parsedChunk.done) {
+          res.write("data: [END]\n\n");
+          res.end();
+        } else if (parsedChunk.message?.content) {
+          res.write(`data: ${parsedChunk.message.content}\n\n`);
         }
       } catch (err) {
-        console.error("解析流式回應失敗:", err.message);
+        console.error("解析流式回應時發生錯誤:", err);
       }
     });
 
-    ollamaResponse.data.on("end", () => {
+    response.data.on("end", () => {
       res.write("data: [END]\n\n");
       res.end();
     });
-  } catch (error) {
-    console.error("Error calling Ollama API:", error.message);
-    res.write("data: [ERROR]\n\n");
-    res.end();
-  }
-  // 修改 streamChatResponse 解析邏輯
-  const parsedData = JSON.parse(jsonData);
-  if (parsedData.done) {
-    res.write("data: [END]\n\n");
-    res.end();
-  } else if (parsedData.message?.content) {
-    // 轉義特殊字符
-    const escapedContent = parsedData.message.content
-      .replace(/\n/g, "\\n") // 保留換行符
-      .replace(/'/g, "\\'")
-      .replace(/"/g, '\\"');
-    res.write(`data: ${JSON.stringify({ content: escapedContent })}\n\n`);
-  }
 
-  // 在後端流式回應處理中增加HTML結構驗證
-  const validateHTMLStructure = (content) => {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    return tempDiv.querySelector('p > div') === null;
-  };
+    response.data.on("error", (err) => {
+      console.error("流式回應錯誤:", err);
+      res.write("data: [ERROR]\n\n");
+      res.end();
+    });
+  } catch (error) {
+    console.error("處理 SSE 時發生錯誤:", error);
+    res.status(500).write("data: 伺服器錯誤\n\n");
+    res.end();
+  }
 }
 
 module.exports = { getChatResponse, streamChatResponse };

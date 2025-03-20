@@ -7,16 +7,16 @@
   white-space: pre-wrap; /* 保留換行與空白 */
 }
 
-.message {
+.chat-messages .message {
   border-radius: 10px;
   position: relative;
   margin-bottom: 10px;
   margin-top: 5px;
-  line-height: 1.5;
+  line-height: 2;
   word-wrap: break-word;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 14px;
-  padding: 0px 10px;
+  padding: 10px;
 }
 
 .user-message {
@@ -37,43 +37,35 @@
   margin-left: 5px;
   align-self: flex-start;
   text-align: left;
+  
 }
 
 
 /* Markdown 通用樣式 */
-.react-markdown pre {
-  background: #f5f5f5;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  margin: 1rem 0;
-}
-
-.react-markdown code {
+.inline-code {
   font-family: 'Fira Code', monospace;
   background: #f0f0f0;
   padding: 0.2em 0.4em;
   border-radius: 3px;
 }
-
-.react-markdown pre code {
-  background: transparent;
-  padding: 0;
-}
-
-/* 代碼塊添加複製按鈕 (進階功能) */
-.react-markdown pre {
+.code-block {
+  max-width: 100%;
   position: relative;
+  background: #e7e7e7;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1rem 0;
 }
+/* 代碼塊添加複製按鈕 (進階功能) */
 
-.react-markdown pre button {
+.copy-button {
+  background-color: #f0f0f0;
   position: absolute;
-  right: 8px;
-  top: 8px;
   opacity: 0.6;
   transition: opacity 0.2s;
 }
 
-.react-markdown pre button:hover {
+.copy-button:hover {
   opacity: 1;
 }

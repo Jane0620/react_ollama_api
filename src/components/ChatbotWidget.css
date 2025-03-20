@@ -6,6 +6,7 @@
   background-size: 200% 150%;
   animation: gradientAnimation 15s ease infinite;
   border-radius: 50%;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +16,7 @@
   z-index: 1000;
   bottom: 20px;
   right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .chatbot-close {

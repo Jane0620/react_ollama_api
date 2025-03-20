@@ -12,41 +12,29 @@ function ChatMessages({ messages }) {
 
     // 滾動事件處理函數
     const handleScroll = () => {
-      // 獲取所有用戶消息元素
-      const userMessages = messagesContainer.querySelectorAll('.user-message');
-
-      // 獲取可視區域高度
+      const userMessages = messagesContainer.querySelectorAll(".user-message");
       const containerHeight = messagesContainer.clientHeight;
-      const containerScrollTop = messagesContainer.scrollTop;
 
-      // 遍歷每條用戶消息
-      userMessages.forEach(message => {
-        // 計算消息在可視區域中的位置
+      userMessages.forEach((message) => {
         const messageRect = message.getBoundingClientRect();
-        const messageTop = messageRect.top - messagesContainer.getBoundingClientRect().top;
-
-        // 計算消息在可視區域的相對位置 (0-100%)
-        const relativePosition = Math.max(0, Math.min(100,
-          (messageTop / containerHeight) * 100));
-
-        // 根據相對位置設置背景位置
+        const messageTop =
+          messageRect.top - messagesContainer.getBoundingClientRect().top;
+        const relativePosition = Math.max(
+          0,
+          Math.min(100, (messageTop / containerHeight) * 100)
+        );
         message.style.backgroundPosition = `${relativePosition}% 50%`;
       });
     };
 
-    // 添加滾動事件監聽器
-    messagesContainer.addEventListener('scroll', handleScroll);
-
-    // 初始化執行一次，確保初始狀態也有效果
+    messagesContainer.addEventListener("scroll", handleScroll);
     handleScroll();
 
-    // 清理函數
     return () => {
-      messagesContainer.removeEventListener('scroll', handleScroll);
+      messagesContainer.removeEventListener("scroll", handleScroll);
     };
-  }, [messages]); // 當消息更新時重新運行
+  }, [messages]);
 
-  // 前端添加代碼複製功能
   const handleCopyCode = (e) => {
     const code = e.target.nextSibling.textContent;
     navigator.clipboard.writeText(code);
@@ -57,11 +45,27 @@ function ChatMessages({ messages }) {
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`message ${message.sender === "user" ? "user-message" : "ai-message"}`}
+          className={`message ${
+            message.sender === "user" ? "user-message" : "ai-message"
+          }`}
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              p({ node, children }) {
+                // 直接返回子元素，不生成 <p>
+                return <>{children}</>;
+              },
+              pre({ node, children, ...props }) {
+                return (
+                  <div className="code-block">
+                    {children}
+                    <button onClick={handleCopyCode} className="copy-button">
+                      複製
+                    </button>
+                  </div>
+                );
+              },
               code({ node, inline, className, children, ...props }) {
                 if (inline) {
                   return (
@@ -74,7 +78,7 @@ function ChatMessages({ messages }) {
                   <pre className="code-block">
                     <code {...props}>{children}</code>
                     <button onClick={handleCopyCode} className="copy-button">
-                      複製
+                      copy
                     </button>
                   </pre>
                 );
