@@ -58,7 +58,7 @@ const ChatbotWidget = () => {
       {isVisible && (
         <div className="top-left-window">
           <div className="chatbot-header">
-            <h1>Chat Bot</h1>
+            <h3>Chat Bot</h3>
           </div>
           
             <ChatMessages messages={messages} />

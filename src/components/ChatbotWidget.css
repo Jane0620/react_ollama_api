@@ -53,13 +53,14 @@
 }
 
 .chatbot-header {
-  /* background: linear-gradient(45deg, #9599e2, #8bc6ec); */
   background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59, #c471ed, #12c2e9);
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
   color: white;
   text-align: center;
   font-weight: bold;
+  max-height: 60px;
+  margin: 0;
 }
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
