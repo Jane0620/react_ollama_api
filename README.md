@@ -4,13 +4,13 @@
 ## 套件安裝
 > - 專案拉下來後，要執行`npm install`
 > - 因為將後端塞在server資料夾，所以這裡也要執行`npm install`。
-> - ```
+>   ```
 >   cd server   
-    npm install 
+>   npm install 
 >   ```
 > - 後端是 node
-> - ```
-    node app.js 
+>   ```
+>   node app.js 
 >   ```
 
 ## 環境設置
@@ -23,7 +23,7 @@
 ## 設置模型與提示詞
 > 1. 複製`ollama.config.example.js`為`ollama.config.js`
 > 2. 在`ollama.config.js`中修改使用的模型及提示詞
-> 3. ollama api 連結：docs/api.md
+> 3. ollama api 連結：[docs/api.md](https://github.com/ollama/ollama/blob/main/docs/api.md)
 
 ## 嵌入系統
 > - 實作嵌入JSP中
